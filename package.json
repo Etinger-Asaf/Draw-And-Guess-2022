@@ -147,5 +147,11 @@
     "presets": [
       "react-app"
     ]
+  },
+  "engines": {
+    "node": ">=10.0.0"
+  },
+  "devDependencies": {
+    "@babel/preset-react": "^7.18.6"
   }
 }
