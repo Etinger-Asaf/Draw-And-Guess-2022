@@ -3,4 +3,5 @@
 /node_modules
 *.env
 .cache
-/config
+config
+scripts
