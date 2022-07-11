@@ -1,3 +1,4 @@
+const path = require("path");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const { createServer } = require("http");
@@ -22,7 +23,7 @@ const io = new Server(httpServer, {
 });
 
 // TEST
-app.use(express.static(path.resolve(__dirname, "../../build")));
+app.use(express.static(path.join(__dirname, "public")));
 
 io.on("connection", (socket) => {
   socket.on("newDraw", () => {
