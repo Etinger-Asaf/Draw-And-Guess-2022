@@ -25,7 +25,9 @@ const io = new Server(httpServer, {
 // TEST
 // app.use(express.static(path.join(__dirname, "build")));
 app.use(express.static("../../build"));
-
+app.get("/", function (req, res) {
+  res.sendFile("../../build/index.html");
+});
 io.on("connection", (socket) => {
   socket.on("newDraw", () => {
     console.log("newDraw + newPolling back");
