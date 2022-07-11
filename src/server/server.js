@@ -29,7 +29,10 @@ app.get("/", function (req, res) {
   try {
     res.sendFile("../../build/index.html");
   } catch (e) {
-    console.log(e);
+    res.status(400).json({
+      status: "fail",
+      data: e,
+    });
   }
 });
 io.on("connection", (socket) => {
