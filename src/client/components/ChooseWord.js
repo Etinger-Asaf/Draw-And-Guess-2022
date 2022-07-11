@@ -26,7 +26,7 @@ const ChooseWord = () => {
       <div className="chooseWordBtnContainer">
         <Link
           className="btn"
-          to={"/Drawing"}
+          to={"/NewDrawing"}
           state={{ word: wordEasy }}
           value={wordEasy}
         >
@@ -35,7 +35,7 @@ const ChooseWord = () => {
 
         <Link
           className="btn"
-          to={"/Drawing"}
+          to={"/NewDrawing"}
           state={{ word: wordMedium }}
           value={wordMedium}
         >
@@ -44,7 +44,7 @@ const ChooseWord = () => {
 
         <Link
           className="btn"
-          to={"/Drawing"}
+          to={"/NewDrawing"}
           state={{ word: wordHard }}
           value={wordHard}
         >

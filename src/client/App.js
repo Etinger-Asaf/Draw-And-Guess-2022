@@ -10,6 +10,10 @@ import WaitingPlayer2 from "./components/WaitingPlayer2";
 import Drawing from "./components/Drawing";
 import Guessing from "./components/Guessing";
 import PlayerLeft from "./components/PlayerLeft";
+import NewDrawing from "./components/NewDrawing";
+import NewGuessingCanvas from "./reusable/NewGuessingCanvas";
+// Testing
+import DrawingCanvas from "./components/DrawingCanvas";
 
 function App() {
   let [playerLeft, setPlayerLeft] = useState(0);
@@ -52,8 +56,9 @@ function App() {
         <Route path="/ChooseWord" element={<ChooseWord />} />
         <Route path="/WaitingPlayer1" element={<WaitingPlayer1 />} />
         <Route path="/WaitingPlayer2" element={<WaitingPlayer2 />} />
-        <Route path="/Drawing" element={<Drawing />} />
-        <Route path="/Guessing" element={<Guessing />} />
+        {/* <Route path="/Drawing" element={<Drawing />} /> */}
+        <Route path="/NewDrawing" element={<NewDrawing />} />
+        <Route path="/NewGuessingCanvas" element={<NewGuessingCanvas />} />
         <Route path="/PlayerLeft" element={<PlayerLeft />} />
       </Routes>
       {playerLeft === 1 && <Navigate replace to="/PlayerLeft" />}

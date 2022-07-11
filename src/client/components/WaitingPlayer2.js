@@ -13,12 +13,9 @@ const WaitingPlayer2 = () => {
 
   const socket = io("http://localhost:8000");
 
-  socket.on("connect", () => {
-    
-  });
+  socket.on("connect", () => {});
 
   socket.on("newPolling", () => {
-   
     setHttpCounter(httpCounter + 1);
   });
 
@@ -37,7 +34,6 @@ const WaitingPlayer2 = () => {
           return;
         }
 
-       
         if (word.length === 0 && draw.length === 0) {
           setWord(data.body.data.word);
           setDraw(data.body.data.draw);
@@ -62,7 +58,7 @@ const WaitingPlayer2 = () => {
     <div className="backgroundBoxColor">
       <h1>Waiting player 2</h1>
       <p>Waiting is a bummer, but that is part of the game..</p>
-      {game && <Navigate replace to="/Guessing" />}
+      {game && <Navigate replace to="/NewGuessingCanvas" />}
     </div>
   );
 };
