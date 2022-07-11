@@ -1,4 +1,4 @@
-const AnotherGame = require("../models/anotherGameModel");
+const AnotherGame = require("./../models/anotherGameModel");
 
 // getting value
 exports.getAnotherGameValue = async (req, res) => {
