@@ -1,4 +1,4 @@
-const Game = require("./../models/gameModel");
+const Game = require("../models/gameModel");
 
 // This req can only be execute when the word has been chosen and the draw was made (keep the word in redux and ship them together)
 
