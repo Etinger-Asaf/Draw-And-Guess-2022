@@ -23,7 +23,8 @@ const io = new Server(httpServer, {
 });
 
 // TEST
-app.use(express.static(path.join(__dirname, "build")));
+// app.use(express.static(path.join(__dirname, "build")));
+app.use(express.static("../../build"));
 
 io.on("connection", (socket) => {
   socket.on("newDraw", () => {
