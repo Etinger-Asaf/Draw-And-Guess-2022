@@ -26,7 +26,11 @@ const io = new Server(httpServer, {
 // app.use(express.static(path.join(__dirname, "build")));
 app.use(express.static("../../build"));
 app.get("/", function (req, res) {
-  res.sendFile("../../build/index.html");
+  try {
+    res.sendFile("../../build/index.html");
+  } catch (e) {
+    console.log(e);
+  }
 });
 io.on("connection", (socket) => {
   socket.on("newDraw", () => {
