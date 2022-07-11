@@ -23,7 +23,7 @@ const io = new Server(httpServer, {
 });
 
 // TEST
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, "build")));
 
 io.on("connection", (socket) => {
   socket.on("newDraw", () => {
