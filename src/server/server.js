@@ -25,10 +25,11 @@ const io = new Server(httpServer, {
 // TEST
 // app.use(express.static(path.join(__dirname, "build")));
 app.use(express.static(path.join(__dirname, "/build")));
-app.get("/", function (req, res) {
+app.get("/", function (req, res, next) {
   try {
-    res.sendFile("./../../build/index.html");
+    res.sendFile(__dirname + "/build/index.html");
   } catch (e) {
+    console.log("e", e);
     res.status(400).json({
       status: "fail",
       data: e,
