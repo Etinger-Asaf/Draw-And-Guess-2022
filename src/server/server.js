@@ -4,7 +4,7 @@ const dotenv = require("dotenv");
 const { createServer } = require("http");
 const { Server } = require("socket.io");
 const express = require("express");
-dotenv.config({ path: "src/server/config.env" });
+// dotenv.config({ path: "src/server/config.env" });
 const app = require("./app");
 const DB = process.env.DB;
 console.log("DB", DB);
@@ -24,10 +24,10 @@ const io = new Server(httpServer, {
 
 // TEST
 // app.use(express.static(path.join(__dirname, "build")));
-app.use(express.static("../../build"));
+app.use(express.static(path.join(__dirname, "build")));
 app.get("/", function (req, res) {
   try {
-    res.sendFile("../../build/index.html");
+    res.sendFile(path.join(__dirname, "build/index.html"));
   } catch (e) {
     res.status(400).json({
       status: "fail",
