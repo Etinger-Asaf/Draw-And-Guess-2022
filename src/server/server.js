@@ -27,7 +27,7 @@ const io = new Server(httpServer, {
 app.use(express.static(path.join(__dirname, "build")));
 app.get("/", function (req, res, next) {
   try {
-    res.sendFile(__dirname + "build/index.html");
+    res.sendFile(path.join(__dirname, "build", "index.html"));
   } catch (e) {
     console.log("e", e);
     res.status(400).json({
