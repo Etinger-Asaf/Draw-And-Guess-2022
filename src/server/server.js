@@ -24,17 +24,17 @@ const io = new Server(httpServer, {
 
 // TEST
 // app.use(express.static(path.join(__dirname, "build")));
-app.use(express.static(path.join(__dirname, "build")));
-app.get("/", function (req, res) {
-  try {
-    res.sendFile(path.join(__dirname, "build/index.html"));
-  } catch (e) {
-    res.status(400).json({
-      status: "fail",
-      data: e,
-    });
-  }
-});
+app.use("/", express.static(path.join(__dirname, "build")));
+// app.get("/", function (req, res) {
+//   try {
+//     res.sendFile(path.join(__dirname, "build/index.html"));
+//   } catch (e) {
+//     res.status(400).json({
+//       status: "fail",
+//       data: e,
+//     });
+//   }
+// });
 io.on("connection", (socket) => {
   socket.on("newDraw", () => {
     console.log("newDraw + newPolling back");
