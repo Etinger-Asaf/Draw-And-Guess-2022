@@ -70,7 +70,7 @@
     "workbox-webpack-plugin": "^6.4.1"
   },
   "scripts": {
-    "start": "REACT_APP_ENVIRONMENT=production&&SET NODE_ENV=production&&node src/server/server.js",
+    "start": "REACT_APP_ENVIRONMENT=production&&NODE_ENV=production&&node src/server/server.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js",
     "start:client": "node scripts/start.js",
