@@ -26,6 +26,7 @@ function App() {
   if (process.env.REACT_APP_ENVIRONMENT === "development") {
     sokectIoPort = "http://127.0.0.1:8000";
     console.log(process.env.REACT_APP_ENVIRONMENT);
+    console.log(process.env.NODE_ENV);
   } else if (process.env.REACT_APP_ENVIRONMENT === "production") {
     console.log(process.env.REACT_APP_ENVIRONMENT);
     sokectIoPort = "";
