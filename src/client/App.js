@@ -28,7 +28,7 @@ function App() {
     console.log(process.env.REACT_APP_ENVIRONMENT);
   } else if (process.env.REACT_APP_ENVIRONMENT === "production") {
     console.log(process.env.REACT_APP_ENVIRONMENT);
-    sokectIoPort = [];
+    sokectIoPort = "";
   }
 
   useEffect(() => {
