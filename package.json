@@ -70,10 +70,11 @@
     "workbox-webpack-plugin": "^6.4.1"
   },
   "scripts": {
-    "start": "REACT_APP_ENVIRONMENT=production&&NODE_ENV=production&&node src/server/server.js",
+    "start": "SET REACT_APP_ENVIRONMENT=production&&NODE_ENV=production&&node src/server/server.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js",
     "start:client": "node scripts/start.js",
+    "start:client:prod": "SET REACT_APP_ENVIRONMENT=production&&node scripts/start.js",
     "start:server": "SET NODE_ENV=devlopment&&nodemon src/server/server.js"
   },
   "eslintConfig": {
