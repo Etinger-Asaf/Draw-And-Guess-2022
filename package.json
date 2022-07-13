@@ -70,11 +70,11 @@
     "workbox-webpack-plugin": "^6.4.1"
   },
   "scripts": {
-    "start": "node src/server/server.js",
+    "start": "SET NODE_ENV=production&&node src/server/server.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js",
     "start:client": "node scripts/start.js",
-    "start:server": "nodemon src/server/server.js"
+    "start:server": "SET NODE_ENV=development&&nodemon src/server/server.js"
   },
   "eslintConfig": {
     "extends": [

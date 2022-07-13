@@ -7,25 +7,30 @@ import Welcome from "./components/Welcome";
 import ChooseWord from "./components/ChooseWord";
 import WaitingPlayer1 from "./components/WaitingPlayer1";
 import WaitingPlayer2 from "./components/WaitingPlayer2";
-import Drawing from "./components/Drawing";
-import Guessing from "./components/Guessing";
 import PlayerLeft from "./components/PlayerLeft";
 import NewDrawing from "./components/NewDrawing";
 import NewGuessingCanvas from "./reusable/NewGuessingCanvas";
 // Testing
-import DrawingCanvas from "./components/DrawingCanvas";
 
 function App() {
   let [playerLeft, setPlayerLeft] = useState(0);
   let [appBackgroundColor, setAppBackgroundColor] = useState("App");
 
+  console.log("process.env.NODE_ENV", process.env.NODE_ENV);
   const randomIdNum = () => {
     return Math.floor(Math.random() * 1000);
   };
   const playerID = randomIdNum();
 
+  let sokectIoPort = "";
+  if (process.env.NODE_ENV === "development") {
+    sokectIoPort = "http://127.0.0.1:8000";
+  } else if (process.env.NODE_ENV === "production") {
+    sokectIoPort = "";
+  }
+
   useEffect(() => {
-    const socket = io("http://127.0.0.1:8000");
+    const socket = io(sokectIoPort);
     socket.on("connect", () => {});
 
     socket.on("displayPlayerLeft", () => {

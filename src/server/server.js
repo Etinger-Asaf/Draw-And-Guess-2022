@@ -4,8 +4,8 @@ const dotenv = require("dotenv");
 const { createServer } = require("http");
 const { Server } = require("socket.io");
 const express = require("express");
-// dotenv.config({ path: "src/server/config.env" });
 const app = require("./app");
+dotenv.config({ path: "src/server/config.env" });
 const DB = process.env.DB;
 console.log("DB", DB);
 
