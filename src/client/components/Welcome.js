@@ -9,12 +9,19 @@ const Welcome = ({ id }) => {
   const [activeUsersNum, setActiveUsersNum] = useState(0);
   const [isThere2Players, setIsThere2Players] = useState(false);
 
-  const socket = io("http://localhost:8000");
+  let ioURL = "http://localhost:8000";
+  let fetchURL = "http://localhost:8000/api/v1/";
+  if (process.env.REACT_APP_ENVIRONMENT === "production") {
+    ioURL = "";
+    fetchURL = "/api/v1/";
+  }
+
+  const socket = io(ioURL);
 
   useEffect(() => {
     async function fetchData() {
       try {
-        const res = await fetch("http://localhost:8000/api/v1/");
+        const res = await fetch(fetchURL);
         const { data } = await res.json();
 
         setActiveUsersNum(data.activeUsers);
@@ -25,9 +32,7 @@ const Welcome = ({ id }) => {
           body: JSON.stringify({ playerID: id }),
         };
 
-        await fetch("http://localhost:8000/api/v1/", reqOptions).then((res) =>
-          res.json()
-        );
+        await fetch(fetchURL, reqOptions).then((res) => res.json());
       } catch (err) {
         console.log(err);
       }
