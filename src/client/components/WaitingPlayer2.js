@@ -11,7 +11,14 @@ const WaitingPlayer2 = () => {
   const [word, setWord] = useState("");
   const [draw, setDraw] = useState("");
 
-  const socket = io("http://localhost:8000");
+  let ioURL = "http://localhost:8000";
+  let fetchURL = "http://localhost:8000/api/v1/gameData";
+  if (process.env.REACT_APP_ENVIRONMENT === "production") {
+    ioURL = "";
+    fetchURL = "/api/v1/gameData";
+  }
+
+  const socket = io(ioURL);
 
   socket.on("connect", () => {});
 
@@ -22,7 +29,7 @@ const WaitingPlayer2 = () => {
   useEffect(() => {
     async function getGame() {
       try {
-        const res = await fetch("http://localhost:8000/api/v1/gameData");
+        const res = await fetch(fetchURL);
 
         if (!res) {
           return;

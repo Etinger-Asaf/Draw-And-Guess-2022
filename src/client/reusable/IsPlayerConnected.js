@@ -3,7 +3,11 @@ import { io } from "socket.io-client";
 const IsPlayerConnected = ({ statusRec }) => {
   const [connectedPlayer2, setConnectedPlayer2] = useState("not connected");
 
-  const socket = io("http://localhost:8000");
+  let ioURL = "http://localhost:8000";
+  if (process.env.REACT_APP_ENVIRONMENT === "production") {
+    ioURL = "";
+  }
+  const socket = io(ioURL);
 
   useEffect(() => {
     if (statusRec > 0) {

@@ -14,6 +14,10 @@ const NewDrawing = () => {
   useEffect(() => {
     async function postDate() {
       try {
+        let fetchURL = "http://localhost:8000/api/v1/gameData"
+        if (process.env.REACT_APP_ENVIRONMENT === 'production') {
+          fetchURL = "/api/v1/gameData"
+        }
         if (draw.length === 0) return;
 
         const reqOptions = {
@@ -22,7 +26,7 @@ const NewDrawing = () => {
           body: JSON.stringify({ word: word, draw: draw }),
         };
 
-        await fetch("http://localhost:8000/api/v1/gameData", reqOptions).then(
+        await fetch(fetchURL, reqOptions).then(
           (res) => res.json()
         );
       } catch (err) {

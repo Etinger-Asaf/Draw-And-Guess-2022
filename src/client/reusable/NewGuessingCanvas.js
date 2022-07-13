@@ -11,7 +11,15 @@ const NewGuessingCanvas = () => {
   const [canvasDynamicsWidth, setCanvasDynamicsWidth] = useState();
   const [canvasDynamicsHeight, setCanvasDynamicsHeight] = useState();
   const [windowWidth, setWindowWidth] = useState();
-  const socket = io("http://localhost:8000");
+
+  let ioURL = "http://localhost:8000";
+  let fetchURL = "http://localhost:8000/api/v1/gameData"
+  if (process.env.REACT_APP_ENVIRONMENT === 'production') {
+    ioURL = '';
+    fetchURL = "/api/v1/gameData"
+  }
+
+  const socket = io(ioURL);
 
   const { word, draw } = useSelector((state) => state.gameData);
 
@@ -42,7 +50,7 @@ const NewGuessingCanvas = () => {
         method: "DELETE",
         headers: { "Content-type": "application/json" },
       };
-      await fetch("http://localhost:8000/api/v1/gameData", reqOptionsDelete);
+      await fetch(fetchURL, reqOptionsDelete);
     }
     GameData();
   }, [win]);

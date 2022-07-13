@@ -8,7 +8,11 @@ const ChooseWord = () => {
   const [wordMedium, setWordMedium] = useState("");
   const [wordHard, setWordHard] = useState("");
 
-  const socket = io("http://127.0.0.1:8000");
+  let ioURL = "http://127.0.0.1:8000";
+  if (process.env.REACT_APP_ENVIRONMENT === "production") {
+    ioURL = "";
+  }
+  const socket = io(ioURL);
 
   useEffect(() => {
     const easyRandomWord = randomWords({ maxLength: 4, exactly: 1 });

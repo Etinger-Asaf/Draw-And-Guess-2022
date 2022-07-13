@@ -11,7 +11,11 @@ const DrawingCanvas = ({ width, height, setDraw }) => {
   const canvas = useRef();
   const [context, setContext] = useState();
   const [color, setColor] = useState("#080808");
-  const socket = io("http://localhost:8000");
+  let ioURL = "http://localhost:8000";
+  if (process.env.REACT_APP_ENVIRONMENT === 'production') {
+    ioURL = ''
+  }
+  const socket = io(ioURL);
 
   const clearCanvasHandler = () => {
     if (!canvas.current) return;

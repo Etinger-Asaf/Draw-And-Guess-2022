@@ -1,5 +1,13 @@
 export function clearGameData() {
-  fetch("http://localhost:8000/api/v1/", {
+  let fetchURLDelete = "http://localhost:8000/api/v1/";
+  let fetchURLDeleteGameData = "http://localhost:8000/api/v1/gameData";
+
+  if (process.env.REACT_APP_ENVIRONMENT === "production") {
+    fetchURLDelete = "/api/v1/";
+    fetchURLDeleteGameData = "/api/v1/gameData";
+  }
+
+  fetch(fetchURLDelete, {
     method: "DELETE",
     headers: { "Content-type": "application/json" },
   });
@@ -8,5 +16,5 @@ export function clearGameData() {
     method: "DELETE",
     headers: { "Content-type": "application/json" },
   };
-  fetch("http://localhost:8000/api/v1/gameData", reqOptionsDelete);
+  fetch(fetchURLDeleteGameData, reqOptionsDelete);
 }

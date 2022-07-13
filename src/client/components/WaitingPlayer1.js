@@ -6,8 +6,11 @@ import { io } from "socket.io-client";
 const WaitingPlayer1 = () => {
   const [win, setWin] = useState(false);
   const [wrongGuess, setWrongGuess] = useState("");
-
-  const socket = io("http://127.0.0.1:8000");
+  let ioURL = "http://127.0.0.1:8000";
+  if (process.env.REACT_APP_ENVIRONMENT === "production") {
+    ioURL = "";
+  }
+  const socket = io(ioURL);
 
   socket.on("connect", () => {});
 
