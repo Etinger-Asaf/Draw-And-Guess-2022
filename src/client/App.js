@@ -23,9 +23,9 @@ function App() {
   const playerID = randomIdNum();
 
   let sokectIoPort = "";
-  if (process.env.NODE_ENV === "development") {
+  if (process.env.REACT_APP_ENVIRONMENT === "development") {
     sokectIoPort = "http://127.0.0.1:8000";
-  } else if (process.env.NODE_ENV === "production") {
+  } else if (process.env.REACT_APP_ENVIRONMENT === "production") {
     sokectIoPort = "";
   }
 
