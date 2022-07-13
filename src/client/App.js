@@ -26,7 +26,7 @@ function App() {
   if (process.env.REACT_APP_ENVIRONMENT === "development") {
     sokectIoPort = "http://127.0.0.1:8000";
   } else if (process.env.REACT_APP_ENVIRONMENT === "production") {
-    sokectIoPort = "";
+    sokectIoPort = process.env.PORT;
   }
 
   useEffect(() => {

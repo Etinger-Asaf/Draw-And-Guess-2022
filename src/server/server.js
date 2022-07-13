@@ -2,7 +2,7 @@ const path = require("path");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const { createServer } = require("http");
-const { Server } = require("socket.io", { rejectUnauthorized: false });
+const { Server } = require("socket.io");
 const express = require("express");
 const app = require("./app");
 dotenv.config({ path: "src/server/config.env" });
