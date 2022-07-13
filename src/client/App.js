@@ -16,7 +16,6 @@ function App() {
   let [playerLeft, setPlayerLeft] = useState(0);
   let [appBackgroundColor, setAppBackgroundColor] = useState("App");
 
-  console.log("process.env.NODE_ENV", process.env.NODE_ENV);
   const randomIdNum = () => {
     return Math.floor(Math.random() * 1000);
   };
@@ -25,10 +24,12 @@ function App() {
   let sokectIoPort = "";
   if (process.env.REACT_APP_ENVIRONMENT === "development") {
     sokectIoPort = "http://127.0.0.1:8000";
-    console.log(process.env.REACT_APP_ENVIRONMENT);
-    console.log(process.env.NODE_ENV);
-  } else if (process.env.REACT_APP_ENVIRONMENT === "production") {
-    console.log(process.env.REACT_APP_ENVIRONMENT);
+    console.log("dev", process.env.REACT_APP_ENVIRONMENT);
+    console.log("dev", process.env.NODE_ENV);
+  }
+  if (process.env.REACT_APP_ENVIRONMENT === "production") {
+    console.log("prod", process.env.REACT_APP_ENVIRONMENT);
+    console.log("prod", process.env.NODE_ENV);
     sokectIoPort = "";
   }
 
