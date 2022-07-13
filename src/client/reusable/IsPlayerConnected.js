@@ -17,18 +17,20 @@ const IsPlayerConnected = ({ statusRec }) => {
 
   return (
     <div className="isPlayerConnectedDisplay">
-      <h2 key={statusRec} className="playerIsConnected">
-        Player 1 is connected
-      </h2>
-      <h2
-        className={
-          connectedPlayer2 === "connected"
-            ? "playerIsConnected"
-            : "playerIsNotConnected"
-        }
-      >
-        Player 2 is {connectedPlayer2}
-      </h2>
+      <div>
+        <h2 key={statusRec} className="playerIsConnected">
+          Player 1 is connected
+        </h2>
+        <h2
+          className={
+            connectedPlayer2 === "connected"
+              ? "playerIsConnected"
+              : "playerIsNotConnected"
+          }
+        >
+          Player 2 is {connectedPlayer2}
+        </h2>
+      </div>
     </div>
   );
 };

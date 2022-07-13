@@ -74,7 +74,7 @@
     "build": "node scripts/build.js",
     "test": "node scripts/test.js",
     "start:client": "node scripts/start.js",
-    "start:server": "REACT_APP_ENVIRONMENT=development&&nodemon src/server/server.js"
+    "start:server": "SET NODE_ENV=devlopment&&nodemon src/server/server.js"
   },
   "eslintConfig": {
     "extends": [
