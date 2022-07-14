@@ -14,6 +14,7 @@ const Welcome = ({ id }) => {
 
   console.log(process.env.NODE_ENV);
   console.log(process.env.REACT_APP_ENVIRONMENT);
+  console.log(process.env.PORT);
   if (process.env.NODE_ENV === "production") {
     ioURL = process.env.PORT;
     fetchURL = `/api/v1`;
