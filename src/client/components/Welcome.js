@@ -3,10 +3,10 @@ import { io } from "socket.io-client";
 import { Link } from "react-router-dom";
 import IsPlayerConnected from "../reusable/IsPlayerConnected";
 import ThereAre2Players from "./ThereAre2Players";
-import dotenv from "dotenv";
+// import dotenv from "dotenv";
 import "../styles.css";
 
-dotenv.config({ path: "./../../server/config.env" });
+// dotenv.config({ path: "./../../server/config.env" });
 
 const Welcome = ({ id }) => {
   const [activeUsersNum, setActiveUsersNum] = useState(0);
