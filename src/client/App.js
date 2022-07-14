@@ -35,7 +35,7 @@ function App() {
   }
 
   useEffect(() => {
-    const socket = io(ioURL);
+    const socket = io(sokectIoPort);
     socket.on("connect", () => {});
 
     socket.on("displayPlayerLeft", () => {
