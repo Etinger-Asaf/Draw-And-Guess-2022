@@ -19,7 +19,7 @@ const Welcome = ({ id }) => {
   console.log(process.env.REACT_APP_ENVIRONMENT);
   console.log(process.env.PORT);
   if (process.env.NODE_ENV === "production") {
-    ioURL = window.location;
+    ioURL = "https://draw-riddle.herokuapp.com";
     fetchURL = `/api/v1`;
   }
 
