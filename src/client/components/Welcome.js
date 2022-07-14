@@ -3,7 +3,10 @@ import { io } from "socket.io-client";
 import { Link } from "react-router-dom";
 import IsPlayerConnected from "../reusable/IsPlayerConnected";
 import ThereAre2Players from "./ThereAre2Players";
+import dotenv from "dotenv";
 import "../styles.css";
+
+dotenv.config({ path: "./../../server/config.env" });
 
 const Welcome = ({ id }) => {
   const [activeUsersNum, setActiveUsersNum] = useState(0);
@@ -16,7 +19,7 @@ const Welcome = ({ id }) => {
   console.log(process.env.REACT_APP_ENVIRONMENT);
   console.log(process.env.PORT);
   if (process.env.NODE_ENV === "production") {
-    ioURL = process.env.PORT;
+    ioURL = window.location;
     fetchURL = `/api/v1`;
   }
 
