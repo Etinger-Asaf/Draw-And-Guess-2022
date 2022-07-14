@@ -31,6 +31,8 @@ function App() {
     console.log("prod", process.env.REACT_APP_ENVIRONMENT);
     console.log("prod", process.env.NODE_ENV);
     sokectIoPort = "";
+    // sokectIoPort = "https://draw-riddle.herokuapp.com/";
+    // To try to deply it all with app url
   }
 
   useEffect(() => {

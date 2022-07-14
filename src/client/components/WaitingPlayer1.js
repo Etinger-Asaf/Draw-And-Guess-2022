@@ -7,6 +7,7 @@ const WaitingPlayer1 = () => {
   const [win, setWin] = useState(false);
   const [wrongGuess, setWrongGuess] = useState("");
   let ioURL = "http://127.0.0.1:8000";
+
   if (process.env.REACT_APP_ENVIRONMENT === "production") {
     ioURL = "";
   }
