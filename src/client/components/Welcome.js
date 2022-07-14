@@ -14,7 +14,7 @@ const Welcome = ({ id }) => {
 
   if (process.env.REACT_APP_ENVIRONMENT === "production") {
     ioURL = process.env.PORT;
-    fetchURL = `${process.env.PORT}/api/v1/`;
+    fetchURL = `/api/v1/`;
   }
 
   const socket = io(ioURL);
