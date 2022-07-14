@@ -14,9 +14,9 @@ const NewDrawing = () => {
   useEffect(() => {
     async function postDate() {
       try {
-        let fetchURL = "http://localhost:8000/api/v1/gameData"
-        if (process.env.REACT_APP_ENVIRONMENT === 'production') {
-          fetchURL = "/api/v1/gameData"
+        let fetchURL = "http://localhost:8000/api/v1/gameData";
+        if (process.env.REACT_APP_ENVIRONMENT === "production") {
+          fetchURL = "/api/v1/gameData";
         }
         if (draw.length === 0) return;
 
@@ -26,9 +26,7 @@ const NewDrawing = () => {
           body: JSON.stringify({ word: word, draw: draw }),
         };
 
-        await fetch(fetchURL, reqOptions).then(
-          (res) => res.json()
-        );
+        await fetch(fetchURL, reqOptions).then((res) => res.json());
       } catch (err) {
         console.log(err);
       }
@@ -44,7 +42,7 @@ const NewDrawing = () => {
 
   useLayoutEffect(() => {
     const canvasWidth = window.innerWidth * 0.9;
-    const canvasHeight = window.innerHeight * 0.7;
+    const canvasHeight = window.innerHeight * 0.5;
     setCanvasDynamicsWidth(canvasWidth);
     setCanvasDynamicsHeight(canvasHeight);
   }, [windowWidth]);

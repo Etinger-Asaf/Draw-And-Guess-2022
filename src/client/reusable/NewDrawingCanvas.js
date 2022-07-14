@@ -12,8 +12,8 @@ const DrawingCanvas = ({ width, height, setDraw }) => {
   const [context, setContext] = useState();
   const [color, setColor] = useState("#080808");
   let ioURL = "http://localhost:8000";
-  if (process.env.NODE_ENV === 'production') {
-    ioURL = "https://draw-riddle.herokuapp.com"
+  if (process.env.NODE_ENV === "production") {
+    ioURL = "https://draw-riddle.herokuapp.com";
   }
   const socket = io(ioURL);
 
@@ -58,6 +58,7 @@ const DrawingCanvas = ({ width, height, setDraw }) => {
       mouseDown = false;
     };
     const handleMouseMove = (e) => {
+      console.log("what is this", e);
       if (mouseDown && context) {
         start = {
           x: end.x,
@@ -84,8 +85,11 @@ const DrawingCanvas = ({ width, height, setDraw }) => {
 
       if (renderCtx) {
         canvas.current.addEventListener("mousedown", handleMouseDown);
+        canvas.current.addEventListener("touchstart", handleMouseDown);
         canvas.current.addEventListener("mouseup", handleMouseUp);
+        canvas.current.addEventListener("touchend", handleMouseUp);
         canvas.current.addEventListener("mousemove", handleMouseMove);
+        canvas.current.addEventListener("touchmove", handleMouseMove);
 
         canvasOffsetLeft = canvas.current.offsetLeft;
         canvasOffsetTop = canvas.current.offsetTop;
@@ -97,8 +101,11 @@ const DrawingCanvas = ({ width, height, setDraw }) => {
     return function cleanup() {
       if (canvas.current) {
         canvas.current.removeEventListener("mousedown", handleMouseDown);
+        canvas.current.removeEventListener("touchstart", handleMouseDown);
         canvas.current.removeEventListener("mouseup", handleMouseUp);
+        canvas.current.removeEventListener("touchend", handleMouseUp);
         canvas.current.removeEventListener("mousemove", handleMouseMove);
+        canvas.current.removeEventListener("touchmove", handleMouseMove);
       }
     };
   }, [context, color]);
@@ -115,31 +122,31 @@ const DrawingCanvas = ({ width, height, setDraw }) => {
       </div>
       <div className="colorSelectionBtnContainer">
         <button
-          className="colorBtn btnBlack"
+          className="colorBtn btnRed"
           onClick={() => {
             setColor("#080808");
           }}
         ></button>
         <button
-          className="colorBtn btnRed"
+          className="colorBtn btnBlack"
           onClick={() => {
             setColor("#f70202");
           }}
         ></button>
         <button
-          className="colorBtn btnYellow"
+          className="colorBtn btnBlue"
           onClick={() => {
             setColor("#f7ef02");
           }}
         ></button>
         <button
-          className="colorBtn btnBlue"
+          className="colorBtn btnGreen"
           onClick={() => {
             setColor("#0213f7");
           }}
         ></button>
         <button
-          className="colorBtn btnGreen"
+          className="colorBtn btnYellow"
           onClick={() => {
             setColor("#0bf702");
           }}
@@ -147,7 +154,7 @@ const DrawingCanvas = ({ width, height, setDraw }) => {
       </div>
       <div className="navigationBtnContainer">
         <button
-          className="btn"
+          className="btn clearAndSaveBtns"
           onClick={() => {
             clearCanvasHandler();
           }}
@@ -155,7 +162,7 @@ const DrawingCanvas = ({ width, height, setDraw }) => {
           clear
         </button>
         <button
-          className="btn"
+          className="btn clearAndSaveBtns"
           onClick={() => {
             saveCanvasFinalDrawHandler();
           }}

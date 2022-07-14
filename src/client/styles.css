@@ -67,7 +67,7 @@ html {
   padding: 1rem;
   background-color: rgba(255, 255, 255, 0.4);
   transition: all 0.3s;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   margin: 0 1rem;
 }
 
@@ -108,21 +108,25 @@ html {
 }
 
 .btnRed {
-  background-color: #f70202;
-}
-.btnBlack {
-  background-color: #080808;
+  background-color: #072624;
   border-radius: 10px 0 0 10px;
 }
+.btnBlack {
+  background-color: #1e9892;
+}
 .btnBlue {
-  background-color: #0213f7;
+  background-color: #51cbc5;
 }
 .btnGreen {
-  background-color: #0bf702;
-  border-radius: 0 10px 10px 0;
+  background-color: #a8e5e2;
 }
 .btnYellow {
-  background-color: #f7ef02;
+  background-color: #e9f9f8;
+  border-radius: 0 10px 10px 0;
+}
+
+.clearAndSaveBtns {
+  margin-bottom: 1.4rem;
 }
 
 .navigationBtnContainer,
