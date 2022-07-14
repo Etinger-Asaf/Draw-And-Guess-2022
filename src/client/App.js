@@ -30,11 +30,11 @@ function App() {
   if (process.env.NODE_ENV === "production") {
     console.log("prod", process.env.REACT_APP_ENVIRONMENT);
     console.log("prod", process.env.NODE_ENV);
-    sokectIoPort = window.location;
+    sokectIoPort = "";
   }
 
   useEffect(() => {
-    const socket = io(sokectIoPort);
+    const socket = io();
     socket.on("connect", () => {});
 
     socket.on("displayPlayerLeft", () => {
