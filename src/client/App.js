@@ -30,9 +30,7 @@ function App() {
   if (process.env.NODE_ENV === "production") {
     console.log("prod", process.env.REACT_APP_ENVIRONMENT);
     console.log("prod", process.env.NODE_ENV);
-    sokectIoPort = "https://draw-riddle.herokuapp.com";
-    // sokectIoPort = "https://draw-riddle.herokuapp.com/";
-    // To try to deply it all with app url
+    sokectIoPort = window.location;
   }
 
   useEffect(() => {
