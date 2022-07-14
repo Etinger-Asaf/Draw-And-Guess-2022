@@ -14,8 +14,8 @@ const NewGuessingCanvas = () => {
 
   let ioURL = "http://localhost:8000";
   let fetchURL = "http://localhost:8000/api/v1/gameData"
-  if (process.env.REACT_APP_ENVIRONMENT === 'production') {
-    ioURL = '';
+  if (process.env.NODE_ENV === 'production') {
+    ioURL = "https://draw-riddle.herokuapp.com";
     fetchURL = "/api/v1/gameData"
   }
 

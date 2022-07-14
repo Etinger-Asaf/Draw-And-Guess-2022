@@ -9,7 +9,7 @@ const WaitingPlayer1 = () => {
   let ioURL = "http://127.0.0.1:8000";
 
   if (process.env.REACT_APP_ENVIRONMENT === "production") {
-    ioURL = "";
+    ioURL = "https://draw-riddle.herokuapp.com";
   }
   const socket = io(ioURL);
 

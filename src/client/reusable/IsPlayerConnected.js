@@ -4,8 +4,8 @@ const IsPlayerConnected = ({ statusRec }) => {
   const [connectedPlayer2, setConnectedPlayer2] = useState("not connected");
 
   let ioURL = "http://localhost:8000";
-  if (process.env.REACT_APP_ENVIRONMENT === "production") {
-    ioURL = "";
+  if (process.env.NODE_ENV === "production") {
+    ioURL = "https://draw-riddle.herokuapp.com";
   }
   const socket = io(ioURL);
 

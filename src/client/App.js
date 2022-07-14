@@ -30,6 +30,7 @@ function App() {
   if (process.env.NODE_ENV === "production") {
     console.log("prod", process.env.REACT_APP_ENVIRONMENT);
     console.log("prod", process.env.NODE_ENV);
+    console.log("prod", process.env.PORT);
     sokectIoPort = "https://draw-riddle.herokuapp.com";
   }
 
