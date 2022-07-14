@@ -10,12 +10,12 @@ const Welcome = ({ id }) => {
   const [isThere2Players, setIsThere2Players] = useState(false);
 
   let ioURL = "http://localhost:8000";
-  let fetchURL = "http://localhost:8000/api/v1/";
+  let fetchURL = "http://localhost:8000/api/v1";
 
   console.log(process.env.NODE_ENV);
   console.log(process.env.REACT_APP_ENVIRONMENT);
   if (process.env.NODE_ENV === "production") {
-    ioURL = "";
+    ioURL = process.env.PORT;
     fetchURL = `/api/v1`;
   }
 
