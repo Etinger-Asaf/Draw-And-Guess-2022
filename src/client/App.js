@@ -30,11 +30,11 @@ function App() {
   if (process.env.NODE_ENV === "production") {
     console.log("prod", process.env.REACT_APP_ENVIRONMENT);
     console.log("prod", process.env.NODE_ENV);
-    sokectIoPort = "";
+    sokectIoPort = "https://draw-riddle.herokuapp.com";
   }
 
   useEffect(() => {
-    const socket = io();
+    const socket = io(ioURL);
     socket.on("connect", () => {});
 
     socket.on("displayPlayerLeft", () => {

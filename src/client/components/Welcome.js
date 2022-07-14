@@ -23,7 +23,7 @@ const Welcome = ({ id }) => {
     fetchURL = `/api/v1`;
   }
 
-  const socket = io();
+  const socket = io(ioURL);
 
   useEffect(() => {
     async function fetchData() {
