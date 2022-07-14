@@ -12,8 +12,8 @@ const Welcome = ({ id }) => {
   let ioURL = "http://localhost:8000";
   let fetchURL = "http://localhost:8000/api/v1/";
 
-  if (process.env.REACT_APP_ENVIRONMENT === "production") {
-    ioURL = process.env.PORT;
+  if (process.env.NODE_ENV === "production") {
+    ioURL = "";
     fetchURL = `/api/v1/`;
   }
 
