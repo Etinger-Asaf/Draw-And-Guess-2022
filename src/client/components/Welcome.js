@@ -12,9 +12,11 @@ const Welcome = ({ id }) => {
   let ioURL = "http://localhost:8000";
   let fetchURL = "http://localhost:8000/api/v1/";
 
+  console.log(process.env.NODE_ENV);
+  console.log(process.env.REACT_APP_ENVIRONMENT);
   if (process.env.NODE_ENV === "production") {
     ioURL = "";
-    fetchURL = `/api/v1/`;
+    fetchURL = `/api/v1`;
   }
 
   const socket = io(ioURL);
