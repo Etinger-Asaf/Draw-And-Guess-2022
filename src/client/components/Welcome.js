@@ -11,9 +11,9 @@ const Welcome = ({ id }) => {
 
   let ioURL = "http://localhost:8000";
   let fetchURL = "http://localhost:8000/api/v1/";
-  
+
   if (process.env.REACT_APP_ENVIRONMENT === "production") {
-    ioURL = "";
+    ioURL = process.env.PORT;
     fetchURL = `${process.env.PORT}/api/v1/`;
   }
 
@@ -23,7 +23,9 @@ const Welcome = ({ id }) => {
     async function fetchData() {
       try {
         const res = await fetch(fetchURL);
+        console.log("res", res);
         const { data } = await res.json();
+        console.log("data", data);
 
         setActiveUsersNum(data.activeUsers);
 
