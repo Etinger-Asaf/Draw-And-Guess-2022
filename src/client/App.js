@@ -60,13 +60,12 @@ function App() {
   });
 
   return (
-    <div className={appBackgroundColor}>
+    <div className={`${appBackgroundColor} app`}>
       <Routes>
         <Route path="/" element={<Welcome id={playerID} />} />
         <Route path="/ChooseWord" element={<ChooseWord />} />
         <Route path="/WaitingPlayer1" element={<WaitingPlayer1 />} />
         <Route path="/WaitingPlayer2" element={<WaitingPlayer2 />} />
-        {/* <Route path="/Drawing" element={<Drawing />} /> */}
         <Route path="/NewDrawing" element={<NewDrawing />} />
         <Route path="/NewGuessingCanvas" element={<NewGuessingCanvas />} />
         <Route path="/PlayerLeft" element={<PlayerLeft />} />

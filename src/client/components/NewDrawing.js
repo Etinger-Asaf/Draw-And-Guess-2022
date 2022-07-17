@@ -48,13 +48,15 @@ const NewDrawing = () => {
   }, [windowWidth]);
 
   return (
-    <div className="backgroundBoxColor">
+    <div className="backgroundBoxColor newDrawingPage">
       <h1>Your word to draw is {word}</h1>
-      <NewDrawingCanvas
-        setDraw={setDraw}
-        width={canvasDynamicsWidth}
-        height={canvasDynamicsHeight}
-      />
+      <div>
+        <NewDrawingCanvas
+          setDraw={setDraw}
+          width={canvasDynamicsWidth}
+          height={canvasDynamicsHeight}
+        />
+      </div>
     </div>
   );
 };

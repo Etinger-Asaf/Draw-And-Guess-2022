@@ -210,7 +210,7 @@ const DrawingCanvas = ({ width, height, setDraw }) => {
       </div>
       <div className="navigationBtnContainer">
         <button
-          className="btn clearAndSaveBtns"
+          className="btn drawBtn clearAndSaveBtns"
           onClick={() => {
             clearCanvasHandler();
           }}
@@ -218,7 +218,7 @@ const DrawingCanvas = ({ width, height, setDraw }) => {
           clear
         </button>
         <button
-          className="btn clearAndSaveBtns"
+          className="btn drawBtn clearAndSaveBtns"
           onClick={() => {
             saveCanvasFinalDrawHandler();
           }}
@@ -226,7 +226,7 @@ const DrawingCanvas = ({ width, height, setDraw }) => {
           save
         </button>
         <Link
-          className="btn canvasBtn playBtn"
+          className="btn drawBtn canvasBtn playBtn"
           to="/WaitingPlayer1"
           onClick={() => {
             socket.emit("newDraw");
