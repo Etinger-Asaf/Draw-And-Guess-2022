@@ -20,13 +20,13 @@ const WaitingPlayer2 = () => {
 
   const socket = io(ioURL);
 
-  socket.on("connect", () => {});
-
   socket.on("newPolling", () => {
     setHttpCounter(httpCounter + 1);
   });
 
   useEffect(() => {
+    if (httpCounter === 0) return;
+
     async function getGame() {
       try {
         const res = await fetch(fetchURL);
@@ -53,9 +53,7 @@ const WaitingPlayer2 = () => {
   }, [httpCounter]);
 
   useEffect(() => {
-    if (word.length === 0 || draw.length === 0) {
-      return;
-    }
+    if (word.length === 0 || draw.length === 0) return;
     dispatch(updateWord(word));
     dispatch(updateDraw(draw));
     setGame(true);

@@ -13,8 +13,6 @@ const WaitingPlayer1 = () => {
   }
   const socket = io(ioURL);
 
-  socket.on("connect", () => {});
-
   socket.on("allWin", () => {
     setWin(true);
   });

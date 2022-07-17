@@ -11,7 +11,9 @@ const DrawingCanvas = ({ width, height, setDraw }) => {
   const canvas = useRef();
   const [context, setContext] = useState();
   const [color, setColor] = useState("#080808");
+
   let ioURL = "http://localhost:8000";
+
   if (process.env.NODE_ENV === "production") {
     ioURL = "https://draw-riddle.herokuapp.com";
   }
