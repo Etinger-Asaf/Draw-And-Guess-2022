@@ -141,9 +141,9 @@ const DrawingCanvas = ({ width, height, setDraw }) => {
         canvas.current.addEventListener("mouseup", handleMouseUp);
         canvas.current.addEventListener("mousemove", handleMouseMove);
 
-        canvas.current.addEventListener("touchstart", touchStartHnadler);
-        canvas.current.addEventListener("touchmove", touchMoveHandler);
-        canvas.current.addEventListener("touchend", touchEndHnadler);
+        canvas.current.addEventListener("touchstart", touchStartHnadler, false);
+        canvas.current.addEventListener("touchmove", touchMoveHandler, false);
+        canvas.current.addEventListener("touchend", touchEndHnadler, false);
 
         canvasOffsetLeft = canvas.current.offsetLeft;
         canvasOffsetTop = canvas.current.offsetTop;
