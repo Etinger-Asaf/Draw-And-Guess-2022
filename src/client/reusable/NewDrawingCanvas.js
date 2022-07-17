@@ -79,65 +79,55 @@ const DrawingCanvas = ({ width, height, setDraw }) => {
       }
     };
 
-    // test
+    // TOUCH DRAWING
 
-    const handleTouchStart = () => {
-      const mouseDownEventForTouch = (e) => {
-        console.log("handleTouchStart", e);
+    const touchStartHnadler = (e) => {
+      console.log("touchStartHnadler", e);
+      mouseDown = true;
 
-        mouseDown = true;
+      start = {
+        x: e.clientX - canvasOffsetLeft,
+        y: e.clientY - canvasOffsetTop,
+      };
 
+      end = {
+        x: e.clientX - canvasOffsetLeft,
+        y: e.clientY - canvasOffsetTop,
+      };
+    };
+
+    // Handling mouse move
+
+    const touchMoveHandler = (e) => {
+      console.log(mouseDown);
+
+      if (mouseDown && context) {
         start = {
-          x: e.clientX - canvasOffsetLeft,
-          y: e.clientY - canvasOffsetTop,
+          x: end.x,
+          y: end.y,
         };
+        console.log("startMove", start);
 
         end = {
-          x: e.clientX - canvasOffsetLeft,
-          y: e.clientY - canvasOffsetTop,
+          x: e.touches[0].clientX - canvasOffsetLeft,
+          y: e.touches[0].clientY - canvasOffsetTop,
         };
+        console.log("endMove", end);
 
-        canvas.current.removeEventListener("mousedown", mouseDownEventForTouch);
-      };
-
-      canvas.current.addEventListener("mousedown", mouseDownEventForTouch);
+        context.beginPath();
+        context.moveTo(start.x, start.y);
+        context.lineTo(end.x, end.y);
+        context.strokeStyle = `${color}`;
+        context.lineWidth = 5;
+        context.stroke();
+        context.closePath();
+      }
     };
 
-    const handleTouchUp = () => {
-      const mouseUpEventForTouch = (e) => {
-        console.log("handleTouchUp", e);
-        mouseDown = false;
-        canvas.current.removeEventListener("mouseup", mouseUpEventForTouch);
-      };
-      canvas.current.addEventListener("mouseup", mouseUpEventForTouch);
-    };
+    // Handling mouse up
 
-    const handleTouchMove = () => {
-      const mouseMoveEventForTouch = (e) => {
-        console.log("handleTouchMove", e);
-
-        if (mouseDown && context) {
-          start = {
-            x: end.x,
-            y: end.y,
-          };
-
-          end = {
-            x: e.clientX - canvasOffsetLeft,
-            y: e.clientY - canvasOffsetTop,
-          };
-
-          context.beginPath();
-          context.moveTo(start.x, start.y);
-          context.lineTo(end.x, end.y);
-          context.strokeStyle = `${color}`;
-          context.lineWidth = 5;
-          context.stroke();
-          context.closePath();
-        }
-        canvas.current.removeEventListener("mousemove", mouseMoveEventForTouch);
-      };
-      canvas.current.addEventListener("mousemove", mouseMoveEventForTouch);
+    const touchEndHnadler = (e) => {
+      mouseDown = false;
     };
 
     if (canvas.current) {
@@ -145,11 +135,12 @@ const DrawingCanvas = ({ width, height, setDraw }) => {
 
       if (renderCtx) {
         canvas.current.addEventListener("mousedown", handleMouseDown);
-        canvas.current.addEventListener("touchstart", handleTouchStart);
         canvas.current.addEventListener("mouseup", handleMouseUp);
-        canvas.current.addEventListener("touchend", handleTouchUp);
         canvas.current.addEventListener("mousemove", handleMouseMove);
-        canvas.current.addEventListener("touchmove", handleTouchMove);
+
+        canvas.current.addEventListener("touchstart", touchStartHnadler);
+        canvas.current.addEventListener("touchmove", touchMoveHandler);
+        canvas.current.addEventListener("touchend", touchEndHnadler);
 
         canvasOffsetLeft = canvas.current.offsetLeft;
         canvasOffsetTop = canvas.current.offsetTop;
@@ -160,14 +151,14 @@ const DrawingCanvas = ({ width, height, setDraw }) => {
 
     return function cleanup() {
       if (canvas.current) {
+        // mouse
         canvas.current.removeEventListener("mousedown", handleMouseDown);
-        canvas.current.removeEventListener("touchstart", handleTouchStart);
-
         canvas.current.removeEventListener("mouseup", handleMouseUp);
-        canvas.current.removeEventListener("touchend", handleTouchUp);
-
         canvas.current.removeEventListener("mousemove", handleMouseMove);
-        canvas.current.removeEventListener("touchmove", handleTouchMove);
+        // touch
+        canvas.current.removeEventListener("touchstart", touchStartHnadler);
+        canvas.current.removeEventListener("touchmove", touchMoveHandler);
+        canvas.current.removeEventListener("touchend", touchEndHnadler);
       }
     };
   }, [context, color]);
