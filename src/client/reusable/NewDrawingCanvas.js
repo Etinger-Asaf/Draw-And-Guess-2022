@@ -58,6 +58,7 @@ const DrawingCanvas = ({ width, height, setDraw }) => {
       mouseDown = false;
     };
     const handleMouseMove = (e) => {
+      e.preventDefault();
       if (mouseDown && context) {
         start = {
           x: end.x,
@@ -83,6 +84,7 @@ const DrawingCanvas = ({ width, height, setDraw }) => {
 
     const touchStartHnadler = (e) => {
       console.log("touchStartHnadler", e);
+      e.preventDefault();
       mouseDown = true;
 
       start = {
@@ -99,6 +101,7 @@ const DrawingCanvas = ({ width, height, setDraw }) => {
     // Handling mouse move
 
     const touchMoveHandler = (e) => {
+      e.preventDefault();
       console.log(mouseDown);
 
       if (mouseDown && context) {
