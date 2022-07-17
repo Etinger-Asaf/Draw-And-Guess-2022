@@ -6,6 +6,8 @@
 html {
   margin: none;
   padding: none;
+  height: 100%;
+  overflow: hidden;
 }
 
 /* Fonts */
