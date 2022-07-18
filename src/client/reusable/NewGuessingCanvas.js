@@ -84,15 +84,22 @@ const NewGuessingCanvas = () => {
   }, [windowWidth]);
 
   useEffect(() => {
-    if (draw.length === 0) return;
+    if (
+      draw.length === 0 ||
+      canvasDynamicsWidth === undefined ||
+      canvasDynamicsHeight === undefined
+    )
+      return;
+    console.log(canvasDynamicsWidth, canvasDynamicsHeight);
 
     const canvasCtx = canvas.current.getContext("2d");
     let img = new Image();
     img.onload = () => {
-      canvasCtx.drawImage(img, 0, 0);
+      canvasCtx.drawImage(img, 0, 0, canvasDynamicsWidth, canvasDynamicsHeight);
     };
+
     img.src = draw;
-  }, [draw]);
+  }, [draw, canvasDynamicsWidth, canvasDynamicsHeight]);
 
   return (
     <div className="backgroundBoxColor guessing">
