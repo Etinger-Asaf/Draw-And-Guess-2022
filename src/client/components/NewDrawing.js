@@ -15,7 +15,7 @@ const NewDrawing = () => {
     async function postDate() {
       try {
         let fetchURL = "http://localhost:8000/api/v1/gameData";
-        if (process.env.REACT_APP_ENVIRONMENT === "production") {
+        if (process.env.NODE_ENV === "production") {
           fetchURL = "/api/v1/gameData";
         }
         if (draw.length === 0) return;

@@ -2,7 +2,7 @@ export function clearGameData() {
   let fetchURLDelete = "http://localhost:8000/api/v1/";
   let fetchURLDeleteGameData = "http://localhost:8000/api/v1/gameData";
 
-  if (process.env.REACT_APP_ENVIRONMENT === "production") {
+  if (process.env.NODE_ENV === "production") {
     fetchURLDelete = "/api/v1/";
     fetchURLDeleteGameData = "/api/v1/gameData";
   }

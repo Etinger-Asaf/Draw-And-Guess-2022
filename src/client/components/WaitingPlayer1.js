@@ -8,7 +8,7 @@ const WaitingPlayer1 = () => {
   const [wrongGuess, setWrongGuess] = useState("");
   let ioURL = "http://127.0.0.1:8000";
 
-  if (process.env.REACT_APP_ENVIRONMENT === "production") {
+  if (process.env.NODE_ENV === "production") {
     ioURL = "https://draw-riddle.herokuapp.com";
   }
   const socket = io(ioURL);
