@@ -78,10 +78,10 @@ const NewGuessingCanvas = () => {
 
   useLayoutEffect(() => {
     const canvasWidth = window.innerWidth * 0.9;
-    let canvasHeight = canvasWidth / 3;
-    if (canvasWidth <= 300) {
-      canvasHeight = canvasWidth;
-    }
+    const canvasHeight = canvasWidth / 3;
+    setCanvasDynamicsWidth(canvasWidth);
+    setCanvasDynamicsHeight(canvasHeight);
+
     setCanvasDynamicsWidth(canvasWidth);
     setCanvasDynamicsHeight(canvasHeight);
   }, [windowWidth]);

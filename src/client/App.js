@@ -31,7 +31,6 @@ function App() {
 
   useEffect(() => {
     const socket = io(sokectIoPort);
-    socket.on("connect", () => {});
 
     socket.on("displayPlayerLeft", () => {
       setPlayerLeft(playerLeft++);
@@ -44,6 +43,12 @@ function App() {
     socket.on("changeAppBackgroundColorYellow", () => {
       setAppBackgroundColor("App");
     });
+
+    return () => {
+      socket.off("displayPlayerLeft");
+      socket.off("changeAppBackgroundColorRed");
+      socket.off("changeAppBackgroundColorYellow");
+    };
   }, [playerLeft]);
 
   useEffect(() => {
