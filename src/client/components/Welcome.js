@@ -47,10 +47,12 @@ const Welcome = ({ id }) => {
 
   let path = "/ChooseWord";
 
-  if (activeUsersNum === 1) {
+  useEffect(() => {
+    if (activeUsersNum === 0) return;
+
     socket.emit("player2IsJoined");
     path = "/WaitingPlayer2";
-  }
+  }, [activeUsersNum]);
 
   useEffect(() => {
     socket.on("displayPlayer2Joined", () => {

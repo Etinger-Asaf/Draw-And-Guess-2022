@@ -19,16 +19,6 @@ const DrawingCanvas = ({ width, height, setDraw }) => {
   }
   const socket = io(ioURL);
 
-  useEffect(() => {
-    socket.on("connect", () => {
-      console.log("socket connect NewDrawingCanvas");
-    });
-
-    return () => {
-      socket.off("connect");
-    };
-  }, []);
-
   const clearCanvasHandler = () => {
     if (!canvas.current) return;
     const canvasCtx = canvas.current.getContext("2d");
@@ -95,7 +85,6 @@ const DrawingCanvas = ({ width, height, setDraw }) => {
     // TOUCH DRAWING
 
     const touchStartHnadler = (e) => {
-      console.log("touchStartHnadler", e);
       e.preventDefault();
       mouseDown = true;
 
@@ -114,20 +103,17 @@ const DrawingCanvas = ({ width, height, setDraw }) => {
 
     const touchMoveHandler = (e) => {
       e.preventDefault();
-      console.log(mouseDown);
 
       if (mouseDown && context) {
         start = {
           x: end.x,
           y: end.y,
         };
-        console.log("startMove", start);
 
         end = {
           x: e.touches[0].clientX - canvasOffsetLeft,
           y: e.touches[0].clientY - canvasOffsetTop,
         };
-        console.log("endMove", end);
 
         context.beginPath();
         context.moveTo(start.x, start.y);

@@ -79,8 +79,6 @@ const NewGuessingCanvas = () => {
   useLayoutEffect(() => {
     const canvasWidth = window.innerWidth * 0.9;
     const canvasHeight = canvasWidth / 3;
-    setCanvasDynamicsWidth(canvasWidth);
-    setCanvasDynamicsHeight(canvasHeight);
 
     setCanvasDynamicsWidth(canvasWidth);
     setCanvasDynamicsHeight(canvasHeight);
@@ -116,22 +114,19 @@ const NewGuessingCanvas = () => {
           ref={canvas}
         ></canvas>
       </div>
-      <div
-        className="
-      guessingFormContainer"
-      >
-        <form onSubmit={formHandler} className="guessingForm">
-          <input
-            className="input"
-            placeholder="Type Here!"
-            value={inputWord}
-            onChange={(e) => {
-              setInputWord(e.target.value);
-            }}
-          ></input>
-          <button className="btn">Guess</button>
-        </form>
-      </div>
+
+      <form onSubmit={formHandler} className="guessingForm">
+        <input
+          className="input"
+          placeholder="Type Here!"
+          value={inputWord}
+          onChange={(e) => {
+            setInputWord(e.target.value);
+          }}
+        ></input>
+        <button className="btn">Guess</button>
+      </form>
+
       <div className="popup">
         <WinningPopup whereTo="/ChooseWord" isOpen={win} />
       </div>

@@ -13,7 +13,9 @@ const WinningPopup = ({ whereTo, isOpen }) => {
     <div className="portalDisplayControl">
       <div className="portalContainer">
         <h1 className="portalText">You win!</h1>
-        <h3 className="portalText">Would you like to play another game?</h3>
+        <p className="portalText portalTextP">
+          Would you like to play another game?
+        </p>
         <button
           className="btn portalBtn"
           onClick={() => {

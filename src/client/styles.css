@@ -16,6 +16,7 @@ html {
   letter-spacing: 1.5px;
   text-align: center;
   color: rgb(46, 46, 46);
+  font-weight: 100;
 }
 
 /* General style */
@@ -184,13 +185,12 @@ input,
 }
 
 .guessingForm {
-  display: flex;
   justify-content: center;
   margin: 0.5rem;
 }
 
 .guessingForm input {
-  margin: 0 1rem;
+  margin: 1rem 1rem;
 }
 
 .portalDisplayControl {
@@ -209,17 +209,20 @@ input,
   padding: 2rem;
   border-radius: 10px;
   width: 90vw;
-  height: 90vh;
-  background-color: rgba(46, 46, 46, 0.8);
+  background-color: rgba(46, 46, 46, 0.945);
   display: flex;
   flex-flow: column nowrap;
   justify-content: center;
 }
 
 .portalText {
-  color: rgb(255, 253, 253);
-  letter-spacing: 1rem;
-  font-size: 2.7rem;
+  color: rgb(243, 233, 222);
+  letter-spacing: 0.8rem;
+  font-size: 2.5rem;
+}
+
+.portalTextP {
+  font-size: 1.4rem;
 }
 
 .portalBtn {

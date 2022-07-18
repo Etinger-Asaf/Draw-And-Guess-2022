@@ -70,8 +70,8 @@ io.on("connection", (socket) => {
   });
 
   socket.on("disconnect", (reason) => {
-    // console.log(reason);
-
+    console.log("disconnect server");
+    console.log(reason);
     socket.broadcast.emit("displayPlayerLeft");
   });
 });

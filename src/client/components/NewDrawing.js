@@ -43,6 +43,7 @@ const NewDrawing = () => {
   useLayoutEffect(() => {
     const canvasWidth = window.innerWidth * 0.9;
     const canvasHeight = canvasWidth / 3;
+
     setCanvasDynamicsWidth(canvasWidth);
     setCanvasDynamicsHeight(canvasHeight);
   }, [windowWidth]);
