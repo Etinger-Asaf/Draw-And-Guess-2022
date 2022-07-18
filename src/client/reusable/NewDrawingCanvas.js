@@ -19,6 +19,16 @@ const DrawingCanvas = ({ width, height, setDraw }) => {
   }
   const socket = io(ioURL);
 
+  useEffect(() => {
+    socket.on("connect", () => {
+      console.log("socket connect NewDrawingCanvas");
+    });
+
+    return () => {
+      socket.off("connect");
+    };
+  }, []);
+
   const clearCanvasHandler = () => {
     if (!canvas.current) return;
     const canvasCtx = canvas.current.getContext("2d");

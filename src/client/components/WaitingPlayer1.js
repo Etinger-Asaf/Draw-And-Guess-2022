@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import WinningPopup from "../reusable/WinningPopup";
 import { io } from "socket.io-client";
@@ -13,13 +13,20 @@ const WaitingPlayer1 = () => {
   }
   const socket = io(ioURL);
 
-  socket.on("allWin", () => {
-    setWin(true);
-  });
+  useEffect(() => {
+    socket.on("allWin", () => {
+      setWin(true);
+    });
 
-  socket.on("WrongGuessToDisplay", (wrongGuess) => {
-    setWrongGuess(wrongGuess);
-  });
+    socket.on("WrongGuessToDisplay", (wrongGuess) => {
+      setWrongGuess(wrongGuess);
+    });
+
+    return () => {
+      socket.off("allWin");
+      socket.off("WrongGuessToDisplay");
+    };
+  }, []);
 
   return (
     <div className="backgroundBoxColor">

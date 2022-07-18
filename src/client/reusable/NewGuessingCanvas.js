@@ -106,17 +106,22 @@ const NewGuessingCanvas = () => {
           ref={canvas}
         ></canvas>
       </div>
-      <form onSubmit={formHandler} className="guessingForm">
-        <input
-          className="input"
-          placeholder="Type Here!"
-          value={inputWord}
-          onChange={(e) => {
-            setInputWord(e.target.value);
-          }}
-        ></input>
-        <button className="btn">Guess</button>
-      </form>
+      <div
+        className="
+      guessingFormContainer"
+      >
+        <form onSubmit={formHandler} className="guessingForm">
+          <input
+            className="input"
+            placeholder="Type Here!"
+            value={inputWord}
+            onChange={(e) => {
+              setInputWord(e.target.value);
+            }}
+          ></input>
+          <button className="btn">Guess</button>
+        </form>
+      </div>
       <div className="popup">
         <WinningPopup whereTo="/ChooseWord" isOpen={win} />
       </div>

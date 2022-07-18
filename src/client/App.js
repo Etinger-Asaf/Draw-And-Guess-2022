@@ -24,13 +24,8 @@ function App() {
   let sokectIoPort = "";
   if (process.env.NODE_ENV === "development") {
     sokectIoPort = "http://127.0.0.1:8000";
-    console.log("dev", process.env.REACT_APP_ENVIRONMENT);
-    console.log("dev", process.env.NODE_ENV);
   }
   if (process.env.NODE_ENV === "production") {
-    console.log("prod", process.env.REACT_APP_ENVIRONMENT);
-    console.log("prod", process.env.NODE_ENV);
-    console.log("prod", process.env.PORT);
     sokectIoPort = "https://draw-riddle.herokuapp.com";
   }
 

@@ -20,15 +20,22 @@ const WaitingPlayer2 = () => {
 
   const socket = io(ioURL);
 
-  socket.on("newPolling", () => {
-    setHttpCounter(httpCounter + 1);
-  });
+  useEffect(() => {
+    socket.on("newPolling", () => {
+      setHttpCounter(httpCounter + 1);
+    });
+
+    return () => {
+      socket.off("newPolling");
+    };
+  }, []);
 
   useEffect(() => {
     if (httpCounter === 0) return;
 
     async function getGame() {
       try {
+        console.log("getGame is running");
         const res = await fetch(fetchURL);
 
         if (!res) {
@@ -36,6 +43,7 @@ const WaitingPlayer2 = () => {
         }
 
         const data = await res.json();
+        console.log("data", data);
 
         if (!data) {
           return;

@@ -15,9 +15,6 @@ const Welcome = ({ id }) => {
   let ioURL = "http://localhost:8000";
   let fetchURL = "http://localhost:8000/api/v1";
 
-  console.log(process.env.NODE_ENV);
-  console.log(process.env.REACT_APP_ENVIRONMENT);
-  console.log(process.env.PORT);
   if (process.env.NODE_ENV === "production") {
     ioURL = "https://draw-riddle.herokuapp.com";
     fetchURL = `/api/v1`;
@@ -29,9 +26,8 @@ const Welcome = ({ id }) => {
     async function fetchData() {
       try {
         const res = await fetch(fetchURL);
-        console.log("res", res);
+
         const { data } = await res.json();
-        console.log("data", data);
 
         setActiveUsersNum(data.activeUsers);
 
@@ -49,17 +45,22 @@ const Welcome = ({ id }) => {
     fetchData();
   }, []);
 
-  let path;
-  if (activeUsersNum === 0) {
-    path = "/ChooseWord";
-  } else if (activeUsersNum === 1) {
-    path = "/WaitingPlayer2";
+  let path = "/ChooseWord";
+
+  if (activeUsersNum === 1) {
     socket.emit("player2IsJoined");
+    path = "/WaitingPlayer2";
   }
 
-  socket.on("displayPlayer2Joined", () => {
-    setIsThere2Players(true);
-  });
+  useEffect(() => {
+    socket.on("displayPlayer2Joined", () => {
+      setIsThere2Players(true);
+    });
+
+    return () => {
+      socket.off("displayPlayer2Joined");
+    };
+  }, []);
 
   return (
     <div className="backgroundBoxColor">

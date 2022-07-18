@@ -17,6 +17,10 @@ const IsPlayerConnected = ({ statusRec }) => {
 
   socket.on("displayPlayer2Joined", () => {
     setConnectedPlayer2("connected");
+
+    return () => {
+      socket.off("displayPlayer2Joined");
+    };
   });
 
   return (
