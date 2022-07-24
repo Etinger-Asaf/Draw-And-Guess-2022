@@ -70,14 +70,14 @@
     "workbox-webpack-plugin": "^6.4.1"
   },
   "scripts": {
-    "start": "set REACT_APP_ENVIRONMENT=production&&node src/server/server.js",
+    "start": "REACT_APP_ENVIRONMENT=production&&node src/server/server.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js",
     "start:client": "node scripts/start.js",
-    "start:client:dev": "SET REACT_APP_ENVIRONMENT=development&&node scripts/start.js",
-    "start:client:prod": "SET REACT_APP_ENVIRONMENT=production&&node scripts/start.js",
-    "start:server:dev": "SET NODE_ENV=devlopment&&nodemon src/server/server.js",
-    "start:server:prod": "SET NODE_ENV=production&&nodemon src/server/server.js",
+    "start:client:dev": "REACT_APP_ENVIRONMENT=development&&node scripts/start.js",
+    "start:client:prod": "REACT_APP_ENVIRONMENT=production&&node scripts/start.js",
+    "start:server:dev": "NODE_ENV=devlopment&&nodemon src/server/server.js",
+    "start:server:prod": "NODE_ENV=production&&nodemon src/server/server.js",
     "gpom": "git push origin master"
   },
   "eslintConfig": {

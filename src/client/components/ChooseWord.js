@@ -23,6 +23,7 @@ const ChooseWord = () => {
     setWordMedium(mediumRandomWord);
     setWordHard(hardRandomWord);
   }, []);
+  
 
   return (
     <div className="backgroundBoxColor">
