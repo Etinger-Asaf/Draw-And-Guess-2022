@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { io } from "socket.io-client";
+// import { io } from "socket.io-client";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import IsPlayerConnected from "../reusable/IsPlayerConnected";
 import ThereAre2Players from "./ThereAre2Players";
@@ -11,16 +12,17 @@ import "../styles.css";
 const Welcome = ({ id }) => {
   const [activeUsersNum, setActiveUsersNum] = useState(0);
   const [isThere2Players, setIsThere2Players] = useState(false);
+  const [path, setPath] = useState("/ChooseWord");
 
-  let ioURL = "http://localhost:8000";
+  // let ioURL = "http://localhost:8000";
   let fetchURL = "http://localhost:8000/api/v1";
 
   if (process.env.NODE_ENV === "production") {
-    ioURL = "https://draw-riddle.herokuapp.com";
+    // ioURL = "https://draw-riddle.herokuapp.com";
     fetchURL = `/api/v1`;
   }
 
-  const socket = io(ioURL);
+  // const socket = io(ioURL);
 
   useEffect(() => {
     async function fetchData() {
@@ -28,7 +30,7 @@ const Welcome = ({ id }) => {
         const res = await fetch(fetchURL);
 
         const { data } = await res.json();
-
+        console.log(data.activeUsers);
         setActiveUsersNum(data.activeUsers);
 
         const reqOptions = {
@@ -45,17 +47,11 @@ const Welcome = ({ id }) => {
     fetchData();
   }, []);
 
-  let path = "/ChooseWord";
-
-  useEffect(() => {
-    if (activeUsersNum === 0) return;
-
-    socket.emit("player2IsJoined");
-    path = "/WaitingPlayer2";
-  }, [activeUsersNum]);
+  const socket = useSelector((state) => state.socket.socket);
 
   useEffect(() => {
     socket.on("displayPlayer2Joined", () => {
+      console.log("this is the log im waiting for!");
       setIsThere2Players(true);
     });
 
@@ -63,6 +59,19 @@ const Welcome = ({ id }) => {
       socket.off("displayPlayer2Joined");
     };
   }, []);
+
+  // let path = "/ChooseWord";
+
+  useEffect(() => {
+    if (activeUsersNum === 0) return;
+
+    setPath("/WaitingPlayer2");
+    console.log(path);
+
+    socket.emit("player2IsJoined");
+
+    console.log("this after the emit of player 2 joined");
+  }, [activeUsersNum]);
 
   return (
     <div className="backgroundBoxColor">

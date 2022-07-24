@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-
+import { useSelector } from "react-redux";
 import WinningPopup from "../reusable/WinningPopup";
 import { io } from "socket.io-client";
 
@@ -11,7 +11,8 @@ const WaitingPlayer1 = () => {
   if (process.env.NODE_ENV === "production") {
     ioURL = "https://draw-riddle.herokuapp.com";
   }
-  const socket = io(ioURL);
+  // const socket = io(ioURL);
+  const { socket } = useSelector((state) => state.socket);
 
   useEffect(() => {
     socket.on("allWin", () => {

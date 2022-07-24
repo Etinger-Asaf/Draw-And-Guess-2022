@@ -19,7 +19,8 @@ const NewGuessingCanvas = () => {
     fetchURL = "/api/v1/gameData";
   }
 
-  const socket = io(ioURL);
+  // const socket = io(ioURL);
+  const { socket } = useSelector((state) => state.socket);
 
   const { word, draw } = useSelector((state) => state.gameData);
 

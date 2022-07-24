@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { updateDraw, updateWord } from "../redux/slices/gameDataSlice";
 import { io } from "socket.io-client";
+import { useSelector } from "react-redux";
 const WaitingPlayer2 = () => {
   const dispatch = useDispatch();
 
@@ -18,7 +19,8 @@ const WaitingPlayer2 = () => {
     fetchURL = "/api/v1/gameData";
   }
 
-  const socket = io(ioURL);
+  // const socket = io(ioURL);
+  const { socket } = useSelector((state) => state.socket);
 
   useEffect(() => {
     socket.on("newPolling", () => {

@@ -2,6 +2,7 @@ import randomWords from "random-words";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { io } from "socket.io-client";
+import { useSelector } from "react-redux";
 
 const ChooseWord = () => {
   const [wordEasy, setWordEasy] = useState("");
@@ -12,7 +13,8 @@ const ChooseWord = () => {
   if (process.env.NODE_ENV === "production") {
     ioURL = "https://draw-riddle.herokuapp.com";
   }
-  const socket = io(ioURL);
+  // const socket = io(ioURL);
+  const { socket } = useSelector((state) => state.socket);
 
   useEffect(() => {
     const easyRandomWord = randomWords({ maxLength: 4, exactly: 1 });

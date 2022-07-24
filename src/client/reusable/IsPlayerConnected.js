@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { io } from "socket.io-client";
 const IsPlayerConnected = ({ statusRec }) => {
   const [connectedPlayer2, setConnectedPlayer2] = useState("not connected");
@@ -7,7 +8,7 @@ const IsPlayerConnected = ({ statusRec }) => {
   if (process.env.NODE_ENV === "production") {
     ioURL = "https://draw-riddle.herokuapp.com";
   }
-  const socket = io(ioURL);
+  // const socket = io(ioURL);
 
   useEffect(() => {
     if (statusRec > 0) {
@@ -15,13 +16,19 @@ const IsPlayerConnected = ({ statusRec }) => {
     }
   }, [statusRec]);
 
-  socket.on("displayPlayer2Joined", () => {
-    setConnectedPlayer2("connected");
+  const { socket } = useSelector((state) => state.socket);
+
+  useEffect(() => {
+    if (!socket) return;
+
+    socket.on("displayPlayer2Joined", () => {
+      setConnectedPlayer2("connected");
+    });
 
     return () => {
       socket.off("displayPlayer2Joined");
     };
-  });
+  }, [socket]);
 
   return (
     <div className="isPlayerConnectedDisplay">

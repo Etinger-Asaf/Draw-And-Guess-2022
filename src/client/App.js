@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { io } from "socket.io-client";
 import { clearGameData } from "./helperFunctions/ClearGameData";
+import { useDispatch, useSelector } from "react-redux";
+import { setSocket } from "./redux/slices/socketIoSlice";
 import Welcome from "./components/Welcome";
 import ChooseWord from "./components/ChooseWord";
 import WaitingPlayer1 from "./components/WaitingPlayer1";
@@ -13,25 +15,35 @@ import NewGuessingCanvas from "./reusable/NewGuessingCanvas";
 // Testing
 
 function App() {
+  const dispatch = useDispatch();
   let [playerLeft, setPlayerLeft] = useState(0);
   let [appBackgroundColor, setAppBackgroundColor] = useState("App");
+
+  // Creating socket and useing redux to golobaly serve it
+  let socketIoUrl = "";
+
+  if (process.env.NODE_ENV === "development") {
+    socketIoUrl = "http://127.0.0.1:8000";
+  }
+  if (process.env.NODE_ENV === "production") {
+    socketIoUrl = "https://draw-riddle.herokuapp.com";
+  }
+
+  console.log(socketIoUrl);
+  const socket = io(socketIoUrl);
+  console.log("socket from App", socket);
+  dispatch(setSocket(socket));
+
+  // const { socket } = useSelector((state) => state.socket);
+  // console.log(socket);
 
   const randomIdNum = () => {
     return Math.floor(Math.random() * 1000);
   };
   const playerID = randomIdNum();
 
-  let sokectIoPort = "";
-  if (process.env.NODE_ENV === "development") {
-    sokectIoPort = "http://127.0.0.1:8000";
-  }
-  if (process.env.NODE_ENV === "production") {
-    sokectIoPort = "https://draw-riddle.herokuapp.com";
-  }
-
   useEffect(() => {
-    const socket = io(sokectIoPort);
-
+    socket.emit("Just something to test the server");
     socket.on("displayPlayerLeft", () => {
       setPlayerLeft(playerLeft++);
       console.log("The other player has left event Front");

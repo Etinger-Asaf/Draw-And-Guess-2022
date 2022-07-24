@@ -39,9 +39,16 @@ app.get("/", function (req, res, next) {
   }
 });
 io.on("connection", (socket) => {
+  console.log("socket server side is connected", socket.id);
   socket.on("newDraw", () => {
     console.log("newDraw + newPolling back");
-    socket.broadcast.emit("newPolling");
+    socket.emit("newPolling");
+  });
+
+  // TEST
+  socket.on("Just something to test the server", () => {
+    console.log("The server did got it!");
+    socket.emit("The server is sending a test!");
   });
 
   socket.on("win", () => {
@@ -51,12 +58,13 @@ io.on("connection", (socket) => {
 
   socket.on("wrongGuess", (wrongGuess) => {
     console.log("wrongGuess");
-    socket.broadcast.emit("WrongGuessToDisplay", wrongGuess);
+    socket.emit("WrongGuessToDisplay", wrongGuess);
   });
 
   socket.on("player2IsJoined", () => {
     console.log("2 player has joined");
     socket.broadcast.emit("displayPlayer2Joined");
+    socket.emit("displayPlayer2Joined");
   });
 
   socket.on("backgroundColorChangeRed", () => {
