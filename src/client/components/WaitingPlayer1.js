@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import WinningPopup from "../reusable/WinningPopup";
-import { io } from "socket.io-client";
 
 const WaitingPlayer1 = () => {
   const [win, setWin] = useState(false);

@@ -1,5 +1,4 @@
 import { useRef, useLayoutEffect, useState, useEffect } from "react";
-import { io } from "socket.io-client";
 import { useSelector } from "react-redux";
 import WinningPopup from "./WinningPopup";
 
@@ -19,7 +18,6 @@ const NewGuessingCanvas = () => {
     fetchURL = "/api/v1/gameData";
   }
 
-  // const socket = io(ioURL);
   const { socket } = useSelector((state) => state.socket);
 
   const { word, draw } = useSelector((state) => state.gameData);

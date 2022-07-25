@@ -1,12 +1,11 @@
 import { useLocation } from "react-router-dom";
-import { useLayoutEffect, useState, useRef, useEffect } from "react";
+import { useLayoutEffect, useState, useEffect } from "react";
 import NewDrawingCanvas from "./../reusable/NewDrawingCanvas";
 
 const NewDrawing = () => {
   const location = useLocation();
   const word = location.state.word[0];
   const [draw, setDraw] = useState("");
-  // const backgroundBoxRef = useRef(null);
   const [windowWidth, setWindowWidth] = useState();
   const [canvasDynamicsWidth, setCanvasDynamicsWidth] = useState();
   const [canvasDynamicsHeight, setCanvasDynamicsHeight] = useState();

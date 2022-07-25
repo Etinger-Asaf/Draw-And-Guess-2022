@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { io } from "socket.io-client";
 import { clearGameData } from "./helperFunctions/ClearGameData";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { setSocket } from "./redux/slices/socketIoSlice";
 import Welcome from "./components/Welcome";
 import ChooseWord from "./components/ChooseWord";
@@ -12,7 +12,6 @@ import WaitingPlayer2 from "./components/WaitingPlayer2";
 import PlayerLeft from "./components/PlayerLeft";
 import NewDrawing from "./components/NewDrawing";
 import NewGuessingCanvas from "./reusable/NewGuessingCanvas";
-// Testing
 
 function App() {
   const dispatch = useDispatch();
@@ -48,14 +47,12 @@ function App() {
   const playerID = randomIdNum();
 
   useEffect(() => {
-    console.log(socketState)
     if (!socketState) return;
 
 
     
     socketState.on("displayPlayerLeft", () => {
       setPlayerLeft(playerLeft++);
-      console.log("The other player has left event Front");
     });
 
     socketState.on("changeAppBackgroundColorRed", () => {

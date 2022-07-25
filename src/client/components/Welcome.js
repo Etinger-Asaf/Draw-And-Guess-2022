@@ -1,13 +1,12 @@
 import { useState, useEffect } from "react";
-// import { io } from "socket.io-client";
+
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import IsPlayerConnected from "../reusable/IsPlayerConnected";
 import ThereAre2Players from "./ThereAre2Players";
-// import dotenv from "dotenv";
 import "../styles.css";
 
-// dotenv.config({ path: "./../../server/config.env" });
+
 
 const Welcome = ({ id }) => {
   const [activeUsersNum, setActiveUsersNum] = useState(0);
@@ -15,15 +14,13 @@ const Welcome = ({ id }) => {
   const [socketState, setSocketState] = useState(false);
   const [path, setPath] = useState("/ChooseWord");
 
-  // let ioURL = "http://localhost:8000";
+  
   let fetchURL = "http://localhost:8000/api/v1";
 
   if (process.env.NODE_ENV === "production") {
-    // ioURL = "https://draw-riddle.herokuapp.com";
     fetchURL = `/api/v1`;
   }
 
-  // const socket = io(ioURL);
 
   useEffect(() => {
     async function fetchData() {
@@ -71,7 +68,6 @@ const Welcome = ({ id }) => {
     };
   }, [socketState]);
 
-  // let path = "/ChooseWord";
 
   useEffect(() => {
     if (activeUsersNum === 0 || !socketState) return;

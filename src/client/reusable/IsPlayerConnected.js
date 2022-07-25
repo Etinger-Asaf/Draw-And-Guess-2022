@@ -7,7 +7,6 @@ const IsPlayerConnected = ({ statusRec }) => {
   if (process.env.NODE_ENV === "production") {
     ioURL = "https://draw-riddle.herokuapp.com";
   }
-  // const socket = io(ioURL);
 
   useEffect(() => {
     if (statusRec > 0) {

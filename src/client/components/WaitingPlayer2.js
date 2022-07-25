@@ -18,7 +18,7 @@ const WaitingPlayer2 = () => {
     fetchURL = "/api/v1/gameData";
   }
 
-  // const socket = io(ioURL);
+  
   const { socket } = useSelector((state) => state.socket);
   
 
