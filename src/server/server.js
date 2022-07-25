@@ -38,41 +38,45 @@ app.get("/", function (req, res, next) {
     });
   }
 });
+
 io.on("connection", (socket) => {
+  console.log("socket server side is connected", socket.id);
+
+  socket.on("player2IsJoined", () => {
+    console.log("2 player has joined");
+    io.emit("displayPlayer2Joined");
+  });
+  
   socket.on("newDraw", () => {
     console.log("newDraw + newPolling back");
     socket.broadcast.emit("newPolling");
   });
-
+ 
   socket.on("win", () => {
     console.log("win");
-    socket.broadcast.emit("allWin");
+    io.emit("allWin");
   });
 
   socket.on("wrongGuess", (wrongGuess) => {
     console.log("wrongGuess");
-    socket.broadcast.emit("WrongGuessToDisplay", wrongGuess);
+    io.emit("WrongGuessToDisplay", wrongGuess);
   });
 
-  socket.on("player2IsJoined", () => {
-    console.log("2 player has joined");
-    socket.broadcast.emit("displayPlayer2Joined");
-  });
 
   socket.on("backgroundColorChangeRed", () => {
     console.log("backgroundColorChangeRed back");
-    socket.broadcast.emit("changeAppBackgroundColorRed");
+    io.emit("changeAppBackgroundColorRed");
   });
 
   socket.on("backgroundColorChangeYellow", () => {
     console.log("backgroundColorChangeYellow back");
-    socket.broadcast.emit("changeAppBackgroundColorYellow");
+    io.emit("changeAppBackgroundColorYellow");
   });
 
   socket.on("disconnect", (reason) => {
     console.log("disconnect server");
     console.log(reason);
-    socket.broadcast.emit("displayPlayerLeft");
+    io.emit("displayPlayerLeft");
   });
 });
 

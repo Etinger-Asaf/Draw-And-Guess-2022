@@ -2,7 +2,7 @@ import { Navigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { updateDraw, updateWord } from "../redux/slices/gameDataSlice";
-import { io } from "socket.io-client";
+import { useSelector } from "react-redux";
 const WaitingPlayer2 = () => {
   const dispatch = useDispatch();
 
@@ -18,10 +18,13 @@ const WaitingPlayer2 = () => {
     fetchURL = "/api/v1/gameData";
   }
 
-  const socket = io(ioURL);
+  // const socket = io(ioURL);
+  const { socket } = useSelector((state) => state.socket);
+  
 
   useEffect(() => {
     socket.on("newPolling", () => {
+      
       setHttpCounter(httpCounter + 1);
     });
 
@@ -30,12 +33,14 @@ const WaitingPlayer2 = () => {
     };
   }, []);
 
+
+
   useEffect(() => {
     if (httpCounter === 0) return;
 
     async function getGame() {
       try {
-        console.log("getGame is running");
+        
         const res = await fetch(fetchURL);
 
         if (!res) {
@@ -43,7 +48,7 @@ const WaitingPlayer2 = () => {
         }
 
         const data = await res.json();
-        console.log("data", data);
+        
 
         if (!data) {
           return;

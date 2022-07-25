@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { io } from "socket.io-client";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 let coordinates = {
   x: 0,
@@ -17,7 +18,8 @@ const DrawingCanvas = ({ width, height, setDraw }) => {
   if (process.env.NODE_ENV === "production") {
     ioURL = "https://draw-riddle.herokuapp.com";
   }
-  const socket = io(ioURL);
+  // const socket = io(ioURL);
+  const { socket } = useSelector((state) => state.socket);
 
   const clearCanvasHandler = () => {
     if (!canvas.current) return;

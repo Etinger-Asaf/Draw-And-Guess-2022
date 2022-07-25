@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { io } from "socket.io-client";
+// import { io } from "socket.io-client";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import IsPlayerConnected from "../reusable/IsPlayerConnected";
 import ThereAre2Players from "./ThereAre2Players";
@@ -11,16 +12,18 @@ import "../styles.css";
 const Welcome = ({ id }) => {
   const [activeUsersNum, setActiveUsersNum] = useState(0);
   const [isThere2Players, setIsThere2Players] = useState(false);
+  const [socketState, setSocketState] = useState(false);
+  const [path, setPath] = useState("/ChooseWord");
 
-  let ioURL = "http://localhost:8000";
+  // let ioURL = "http://localhost:8000";
   let fetchURL = "http://localhost:8000/api/v1";
 
   if (process.env.NODE_ENV === "production") {
-    ioURL = "https://draw-riddle.herokuapp.com";
+    // ioURL = "https://draw-riddle.herokuapp.com";
     fetchURL = `/api/v1`;
   }
 
-  const socket = io(ioURL);
+  // const socket = io(ioURL);
 
   useEffect(() => {
     async function fetchData() {
@@ -28,7 +31,7 @@ const Welcome = ({ id }) => {
         const res = await fetch(fetchURL);
 
         const { data } = await res.json();
-
+        
         setActiveUsersNum(data.activeUsers);
 
         const reqOptions = {
@@ -45,24 +48,43 @@ const Welcome = ({ id }) => {
     fetchData();
   }, []);
 
-  let path = "/ChooseWord";
+  const socket = useSelector((state) => state.socket.socket);
+  
 
   useEffect(() => {
-    if (activeUsersNum === 0) return;
+    if (socket.connected) return;
+    setSocketState(socket)
 
-    socket.emit("player2IsJoined");
-    path = "/WaitingPlayer2";
-  }, [activeUsersNum]);
+  }, [socket])
 
   useEffect(() => {
-    socket.on("displayPlayer2Joined", () => {
+    
+    if (socketState === false) return;
+
+    socketState.on("displayPlayer2Joined", () => {
+      
       setIsThere2Players(true);
     });
 
     return () => {
-      socket.off("displayPlayer2Joined");
+      socketState.off("displayPlayer2Joined");
     };
-  }, []);
+  }, [socketState]);
+
+  // let path = "/ChooseWord";
+
+  useEffect(() => {
+    if (activeUsersNum === 0 || !socketState) return;
+
+    
+
+    setPath("/WaitingPlayer2");
+    
+
+    socketState.emit("player2IsJoined");
+
+    
+  }, [activeUsersNum, socketState]);
 
   return (
     <div className="backgroundBoxColor">
