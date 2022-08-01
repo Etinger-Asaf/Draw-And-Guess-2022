@@ -13,6 +13,7 @@ mongoose.connect(DB).then(() => {
   console.log(`DB connection successful`);
 });
 
+
 const port = process.env.PORT || 3000;
 
 console.log(process.env.NODE_ENV);
@@ -38,6 +39,7 @@ app.get("/", function (req, res, next) {
     });
   }
 });
+
 
 io.on("connection", (socket) => {
   console.log("socket server side is connected", socket.id);
@@ -73,10 +75,9 @@ io.on("connection", (socket) => {
     io.emit("changeAppBackgroundColorYellow");
   });
 
-  socket.on("disconnect", (reason) => {
-    console.log("disconnect server");
-    console.log(reason);
-    io.emit("displayPlayerLeft");
+  socket.on("disconnect", () => {
+    console.log(`disconnect ${socket.id}`);
+    socket.broadcast.emit("displayPlayerLeft");
   });
 });
 

@@ -1,9 +1,9 @@
 import "./styles.css";
 import { useEffect, useState } from "react";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import { io } from "socket.io-client";
 import { clearGameData } from "./helperFunctions/ClearGameData";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setSocket } from "./redux/slices/socketIoSlice";
 import Welcome from "./components/Welcome";
 import ChooseWord from "./components/ChooseWord";
@@ -15,9 +15,10 @@ import NewGuessingCanvas from "./reusable/NewGuessingCanvas";
 
 function App() {
   const dispatch = useDispatch();
-  let [playerLeft, setPlayerLeft] = useState(0);
+  let [playerLeftState, setPlayerLeftState] = useState(false);
   let [appBackgroundColor, setAppBackgroundColor] = useState("App");
   let [socketState, setSocketState] = useState(false);
+  const navigate = useNavigate();
 
   // Creating socket and useing redux to golobaly serve it
   let socketIoUrl = "";
@@ -29,17 +30,18 @@ function App() {
     socketIoUrl = "https://draw-riddle.herokuapp.com";
   }
 
-  const socket = io(socketIoUrl);
+  useEffect(() => {
+    const socketToRedux = io(socketIoUrl, {
+      "sync disconnect on unload": true,
+    });
+    dispatch(setSocket(socketToRedux));
+  }, []);
 
+  const { socket } = useSelector((state) => state.socket);
 
-  
-  useEffect(()=> {
-    dispatch(setSocket(socket));
-    setSocketState(socket)
-
-  }, [])
-
-  
+  useEffect(() => {
+    setSocketState(socket);
+  }, [socket]);
 
   const randomIdNum = () => {
     return Math.floor(Math.random() * 1000);
@@ -49,28 +51,41 @@ function App() {
   useEffect(() => {
     if (!socketState) return;
 
-
-    
-    socketState.on("displayPlayerLeft", () => {
-      setPlayerLeft(playerLeft++);
-    });
-
     socketState.on("changeAppBackgroundColorRed", () => {
-
       setAppBackgroundColor("AppRedBackGround");
     });
     socketState.on("changeAppBackgroundColorYellow", () => {
-      
       setAppBackgroundColor("App");
     });
 
     return () => {
-      socketState.off("displayPlayerLeft");
       socketState.off("changeAppBackgroundColorRed");
       socketState.off("changeAppBackgroundColorYellow");
     };
-  }, [playerLeft, socketState]);
+  }, [socketState]);
 
+  useEffect(() => {
+    if (!socketState) return;
+
+    socketState.on("displayPlayerLeft", () => {
+      console.log("player left 1");
+      setPlayerLeftState(true);
+    });
+    setPlayerLeftState(false);
+
+    return () => {
+      socketState.off("displayPlayerLeft");
+    };
+  }, [socketState]);
+
+  const navigationHndler = () => {
+    navigate("/PlayerLeft");
+  };
+
+  useEffect(() => {
+    if (!playerLeftState) return;
+    navigationHndler();
+  }, [playerLeftState]);
 
   useEffect(() => {
     window.addEventListener("beforeunload", clearGameData);
@@ -81,7 +96,7 @@ function App() {
   }, [socketState]);
 
   return (
-    <div className={`${appBackgroundColor} app`}>
+    <div className={`${appBackgroundColor}`}>
       <Routes>
         <Route path="/" element={<Welcome id={playerID} />} />
         <Route path="/ChooseWord" element={<ChooseWord />} />
@@ -91,7 +106,7 @@ function App() {
         <Route path="/NewGuessingCanvas" element={<NewGuessingCanvas />} />
         <Route path="/PlayerLeft" element={<PlayerLeft />} />
       </Routes>
-      {playerLeft === 1 && <Navigate replace to="/PlayerLeft" />}
+      {/* {playerLeftState && <Navigate replace to="/PlayerLeft" /> } */}
     </div>
   );
 }

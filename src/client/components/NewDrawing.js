@@ -50,7 +50,7 @@ const NewDrawing = () => {
   return (
     <div className="backgroundBoxColor newDrawingPage">
       <h1>Your word to draw is {word}</h1>
-      <div>
+      <div className="canvasContainer">
         <NewDrawingCanvas
           setDraw={setDraw}
           width={canvasDynamicsWidth}

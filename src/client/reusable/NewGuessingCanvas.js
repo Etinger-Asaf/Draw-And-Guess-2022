@@ -11,10 +11,8 @@ const NewGuessingCanvas = () => {
   const [canvasDynamicsHeight, setCanvasDynamicsHeight] = useState();
   const [windowWidth, setWindowWidth] = useState();
 
-  let ioURL = "http://localhost:8000";
   let fetchURL = "http://localhost:8000/api/v1/gameData";
   if (process.env.NODE_ENV === "production") {
-    ioURL = "https://draw-riddle.herokuapp.com";
     fetchURL = "/api/v1/gameData";
   }
 
@@ -24,6 +22,17 @@ const NewGuessingCanvas = () => {
 
   const trimAndLowerWord = word.toLowerCase().trim();
   const trimAndLowerInputWord = inputWord.toLowerCase().trim();
+
+  
+  const guessBtnHndler = () => {
+    let res = /^[a-zA-Z]+$/.test(inputWord);
+    console.log('res', res)
+
+    if (!res) {
+      alert('Opps! Guesses can only by in English!')
+    }
+
+  }
 
   const formHandler = (e) => {
     e.preventDefault();
@@ -52,7 +61,7 @@ const NewGuessingCanvas = () => {
       await fetch(fetchURL, reqOptionsDelete);
     }
     GameData();
-  }, [win]);
+  }, [win, fetchURL]);
 
   useEffect(() => {
     if (numGuess === 0) {
@@ -123,7 +132,7 @@ const NewGuessingCanvas = () => {
             setInputWord(e.target.value);
           }}
         ></input>
-        <button className="btn">Guess</button>
+        <button className="btn" onClick={() => {guessBtnHndler()}}>Guess</button>
       </form>
 
       <div className="popup">

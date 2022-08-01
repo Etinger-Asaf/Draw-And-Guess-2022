@@ -8,6 +8,7 @@ const WaitingPlayer2 = () => {
 
   const [game, setGame] = useState(false);
   const [httpCounter, setHttpCounter] = useState(0);
+  const [socketState, setSocketState] = useState(false);
   const [word, setWord] = useState("");
   const [draw, setDraw] = useState("");
 
@@ -21,17 +22,23 @@ const WaitingPlayer2 = () => {
   
   const { socket } = useSelector((state) => state.socket);
   
+  useEffect(() => {
+    if(!socket.id) return;
+    setSocketState(socket)
+  }, [socket])
 
   useEffect(() => {
-    socket.on("newPolling", () => {
+    if (!socketState) return;
+
+    socketState.on("newPolling", () => {
       
       setHttpCounter(httpCounter + 1);
     });
 
     return () => {
-      socket.off("newPolling");
+      socketState.off("newPolling");
     };
-  }, []);
+  }, [socketState]);
 
 
 

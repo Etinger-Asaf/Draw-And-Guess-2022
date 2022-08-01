@@ -7,7 +7,7 @@ html {
   margin: none;
   padding: none;
   height: 100%;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 /* Fonts */
@@ -51,7 +51,7 @@ html {
   background-color: rgba(255, 255, 255, 0.2);
   border-radius: 10px;
   margin: auto;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 .contentAlignmentBox {
@@ -61,6 +61,11 @@ html {
 
 .canvas {
   border-radius: 10px;
+}
+
+.canvasContainer {
+  overflow: hidden;
+  
 }
 
 /* Buttons */
