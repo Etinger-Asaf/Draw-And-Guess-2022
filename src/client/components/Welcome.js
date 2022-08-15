@@ -6,21 +6,17 @@ import IsPlayerConnected from "../reusable/IsPlayerConnected";
 import ThereAre2Players from "./ThereAre2Players";
 import "../styles.css";
 
-
-
 const Welcome = ({ id }) => {
   const [activeUsersNum, setActiveUsersNum] = useState(0);
   const [isThere2Players, setIsThere2Players] = useState(false);
   const [socketState, setSocketState] = useState(false);
   const [path, setPath] = useState("/ChooseWord");
 
-  
   let fetchURL = "http://localhost:8000/api/v1";
 
   if (process.env.NODE_ENV === "production") {
     fetchURL = `/api/v1`;
   }
-
 
   useEffect(() => {
     async function fetchData() {
@@ -28,7 +24,7 @@ const Welcome = ({ id }) => {
         const res = await fetch(fetchURL);
 
         const { data } = await res.json();
-        
+
         setActiveUsersNum(data.activeUsers);
 
         const reqOptions = {
@@ -46,20 +42,16 @@ const Welcome = ({ id }) => {
   }, []);
 
   const socket = useSelector((state) => state.socket.socket);
-  
 
   useEffect(() => {
     if (socket.connected) return;
-    setSocketState(socket)
-
-  }, [socket])
+    setSocketState(socket);
+  }, [socket]);
 
   useEffect(() => {
-    
     if (socketState === false) return;
 
     socketState.on("displayPlayer2Joined", () => {
-      
       setIsThere2Players(true);
     });
 
@@ -68,18 +60,14 @@ const Welcome = ({ id }) => {
     };
   }, [socketState]);
 
+  
 
   useEffect(() => {
     if (activeUsersNum === 0 || !socketState) return;
 
-    
-
     setPath("/WaitingPlayer2");
-    
 
     socketState.emit("player2IsJoined");
-
-    
   }, [activeUsersNum, socketState]);
 
   return (
@@ -89,8 +77,9 @@ const Welcome = ({ id }) => {
           {" "}
           <h1>Draw and Guess</h1>
           <IsPlayerConnected statusRec={activeUsersNum} />
-          {!isThere2Players && <p>Waiting for another player..</p>}
-          {isThere2Players && (
+          {!isThere2Players ? (
+            <p>Waiting for another player..</p>
+          ) : (
             <Link to={path} className="btn welcomeBtn">
               PLAY
             </Link>
